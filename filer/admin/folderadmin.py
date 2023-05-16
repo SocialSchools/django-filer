@@ -238,7 +238,7 @@ class FolderAdmin(PrimitivePermissionAwareModelAdmin):
         if viewtype == 'images_with_missing_data':
             folder = ImagesWithMissingData()
         elif viewtype == 'unfiled_images':
-            folder = UnsortedImages()
+            folder = UnsortedImages(request=request)
         elif viewtype == 'last':
             last_folder_id = request.session.get('filer_last_folder_id')
             try:
