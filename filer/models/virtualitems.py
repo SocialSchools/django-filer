@@ -48,8 +48,13 @@ class UnsortedImages(DummyFolder):
     is_unsorted_uploads = True
     _icon = "unfiled_folder"
 
+    def __init__(self, request=None):
+        super().__init__()
+        self.request = request
     def _files(self):
-        return File.objects.filter(folder__isnull=True)
+        if self.request.user.is_superuser:
+            return File.objects.filter(folder__isnull=True)
+        return File.objects.filter(folder__isnull=True, owner=self.request.user)
     files = property(_files)
 
     def get_admin_directory_listing_url_path(self):
