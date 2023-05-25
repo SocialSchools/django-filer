@@ -3,6 +3,7 @@ from django.forms.models import modelform_factory
 from django.http import JsonResponse
 from django.urls import re_path
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 from .. import settings as filer_settings
 from ..models import Clipboard, ClipboardItem, Folder
