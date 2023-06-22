@@ -9,13 +9,20 @@
         switch (initData.action) {
             case 'change':
                 // Specific function for file editing popup opened from widget
-                opener.dismissRelatedImageLookupPopup(window, initData.new_value, null, initData.obj, null);
+                // opener might not be available when running inside an iframe in cypress.
+                if (opener) {
+                    opener.dismissRelatedImageLookupPopup(window, initData.new_value, null, initData.obj, null);
+                }
                 break;
             case 'delete':
-                opener.dismissDeleteRelatedObjectPopup(window, initData.value);
+                if (opener) {
+                    opener.dismissDeleteRelatedObjectPopup(window, initData.value);
+                }
                 break;
             default:
-                opener.dismissAddRelatedObjectPopup(window, initData.value, initData.obj);
+                if (opener) {
+                    opener.dismissAddRelatedObjectPopup(window, initData.value, initData.obj);
+                }
                 break;
         }
     }
